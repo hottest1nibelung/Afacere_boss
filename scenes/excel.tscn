@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cf2gm50w6cdrh"]
+
+[ext_resource type="Texture2D" uid="uid://dvmrbjdhi2gwj" path="res://sprites/table.png" id="1_2tefx"]
+[ext_resource type="Script" uid="uid://cirtlr1vvhmv0" path="res://scenes/excel.gd" id="1_pam76"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pam76"]
+size = Vector2(314, 252)
+
+[node name="excel" type="Area2D" groups=["enemy"]]
+script = ExtResource("1_pam76")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_2tefx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_pam76")

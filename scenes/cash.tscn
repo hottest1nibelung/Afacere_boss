@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://0entg3uiye4y"]
+
+[ext_resource type="Texture2D" uid="uid://cdwi6vecih3rx" path="res://sprites/cash.png" id="1_41pws"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o3u0c"]
+size = Vector2(113.3164, 43.151493)
+
+[node name="cash" type="Area2D" groups=["cash"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_41pws")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.0000007, -1)
+rotation = -0.45819172
+scale = Vector2(0.74203444, 1.1510924)
+shape = SubResource("RectangleShape2D_o3u0c")

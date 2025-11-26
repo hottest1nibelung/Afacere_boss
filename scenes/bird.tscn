@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://cx5hyqiio8l2y"]
+
+[ext_resource type="Script" uid="uid://8krr4u72jh3g" path="res://scripts/bird.gd" id="1_hq4t0"]
+[ext_resource type="Texture2D" uid="uid://b3pbldu4tlk8t" path="res://sprites/Bird_dead.png" id="2_b7mtg"]
+[ext_resource type="Texture2D" uid="uid://rmd8irw4j441" path="res://sprites/Bird1_transparent_background.png" id="2_twsrt"]
+[ext_resource type="Texture2D" uid="uid://c2m7dnrfmue17" path="res://sprites/Bird2_transparent_background.png" id="3_b7mtg"]
+[ext_resource type="AudioStream" uid="uid://bf2wgv558f4if" path="res://coin-recieved-230517.mp3" id="5_b7mtg"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bdh3x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_b7mtg")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_twsrt")
+}, {
+"duration": 2.5,
+"texture": ExtResource("3_b7mtg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jggmu"]
+radius = 98.16948
+
+[node name="Bird" type="CharacterBody2D"]
+scale = Vector2(0.7, 0.7)
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("1_hq4t0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.35, 0.35)
+sprite_frames = SubResource("SpriteFrames_bdh3x")
+animation = &"dead"
+autoplay = "default"
+frame_progress = 0.28008056
+flip_h = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(8.999999, 21.999998)
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("CircleShape2D_jggmu")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(8.999999, 21.999998)
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("CircleShape2D_jggmu")
+
+[node name="sound_coin_collect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_b7mtg")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

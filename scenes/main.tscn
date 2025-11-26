@@ -1,0 +1,139 @@
+[gd_scene load_steps=19 format=3 uid="uid://cmwioudkbgix5"]
+
+[ext_resource type="Script" uid="uid://cqqccysdhpfyp" path="res://scripts/main.gd" id="1_sugp2"]
+[ext_resource type="PackedScene" uid="uid://cx5hyqiio8l2y" path="res://scenes/bird.tscn" id="2_0wfyh"]
+[ext_resource type="AudioStream" uid="uid://dpwjvukyn66uo" path="res://game-minecraft-gaming-background-music-402451.mp3" id="3_choun"]
+[ext_resource type="Texture2D" uid="uid://b6j2cb08wk6d1" path="res://sprites/Background2.png" id="3_tefeu"]
+[ext_resource type="Script" uid="uid://mjdg68jrr4j5" path="res://scripts/suitcase_spawner.gd" id="7_85g3d"]
+[ext_resource type="Script" uid="uid://bmj2fbr2ug5pj" path="res://scripts/cladire_spawner.gd" id="7_o6xl0"]
+[ext_resource type="FontFile" uid="uid://db71vosv8c0g2" path="res://Kenney Future.ttf" id="7_tipki"]
+[ext_resource type="Script" uid="uid://bh1h6qwscc4w7" path="res://scripts/cash_spawn_point.gd" id="8_85g3d"]
+[ext_resource type="Script" uid="uid://dfhomnhaggclv" path="res://scripts/excel_spawner.gd" id="8_choun"]
+[ext_resource type="Script" uid="uid://b2iqdguyt73uf" path="res://scripts/button.gd" id="8_ya4ey"]
+[ext_resource type="FontFile" uid="uid://dvq4jvtidakta" path="res://times.ttf" id="9_ya4ey"]
+[ext_resource type="Script" uid="uid://bn0aa2i1ip62w" path="res://scripts/quantis_label.gd" id="10_eb6dy"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1bvp3"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lquwl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7mycd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_1bvp3")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_lquwl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_85g3d"]
+font = ExtResource("7_tipki")
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_choun"]
+font = ExtResource("7_tipki")
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_ya4ey"]
+font = ExtResource("9_ya4ey")
+font_size = 30
+font_color = Color(0.8784314, 1, 0.54901963, 1)
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_sugp2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(29, 73)
+sprite_frames = SubResource("SpriteFrames_7mycd")
+frame_progress = 0.46606266
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scroll_offset = Vector2(-2, -5)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Parallax2D"]
+
+[node name="Background2" type="Sprite2D" parent="Parallax2D/ParallaxBackground"]
+position = Vector2(505, 470)
+texture = ExtResource("3_tefeu")
+
+[node name="Camera2D" type="Camera2D" parent="Parallax2D"]
+position = Vector2(507, 457)
+
+[node name="music" type="AudioStreamPlayer2D" parent="Parallax2D/Camera2D"]
+position = Vector2(-505, -451)
+stream = ExtResource("3_choun")
+volume_db = -1.0
+autoplay = true
+
+[node name="cladireSpawner" type="Node2D" parent="."]
+position = Vector2(1134, 773)
+script = ExtResource("7_o6xl0")
+
+[node name="suitcaseSpawner" type="Node2D" parent="."]
+position = Vector2(-146, 92)
+script = ExtResource("7_85g3d")
+
+[node name="excelSpawner" type="Node2D" parent="."]
+position = Vector2(-76, 19)
+script = ExtResource("8_choun")
+
+[node name="enemySpawner" type="Timer" parent="."]
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 21.0
+offset_top = 19.0
+offset_right = 165.0
+offset_bottom = 54.0
+text = "Score: "
+label_settings = SubResource("LabelSettings_85g3d")
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+visible = false
+offset_left = 389.0
+offset_top = 404.0
+offset_right = 630.0
+offset_bottom = 457.0
+theme_override_colors/font_color = Color(6.4913397, 5.1118803, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.24705882, 0.24705882, 0.9607843, 1)
+theme_override_colors/font_hover_color = Color(0.561029, 0.17823198, 0.053962104, 1)
+theme_override_fonts/font = ExtResource("7_tipki")
+theme_override_font_sizes/font_size = 40
+text = "Restart"
+script = ExtResource("8_ya4ey")
+
+[node name="highScore_label" type="Label" parent="CanvasLayer"]
+offset_left = 20.0
+offset_top = 44.0
+offset_right = 289.0
+offset_bottom = 79.0
+text = "Scor record:"
+label_settings = SubResource("LabelSettings_choun")
+
+[node name="quantis_label" type="Label" parent="CanvasLayer"]
+offset_left = 14.0
+offset_top = 746.0
+offset_right = 599.0
+offset_bottom = 883.0
+label_settings = SubResource("LabelSettings_ya4ey")
+autowrap_mode = 2
+script = ExtResource("10_eb6dy")
+
+[node name="cashSpawnertimer" type="Timer" parent="."]
+
+[node name="cashSpawnPoint" type="Node2D" parent="."]
+script = ExtResource("8_85g3d")
+
+[node name="Bird" parent="." instance=ExtResource("2_0wfyh")]
+position = Vector2(133, 339)
+
+[connection signal="timeout" from="enemySpawner" to="." method="_on_enemy_spawner_timeout"]
+[connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_pressed"]
+[connection signal="timeout" from="cashSpawnertimer" to="." method="_on_cash_spawnertimer_timeout"]
